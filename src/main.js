@@ -20,11 +20,23 @@ controls.enableDamping = true
 const loader = new GLTFLoader()
 const textureLoader = new THREE.TextureLoader()
 
+const material = new THREE.ShaderMaterial({
+
+})
 loader.load('./models/holo.glb', (gltf) => {
   const holo = gltf.scene
+  holo.traverse((child) => {
+    if (child.isMesh) {
+      child.material = material
+    }
+  })
   scene.add(holo)
   console.log(holo)
 })
+
+
+
+
 
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
